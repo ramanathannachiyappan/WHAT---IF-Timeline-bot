@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORLD BEYOND REALITY | Alternate History Simulator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animation.css') }}">
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Star Background -->
+    <div class="stars-container" id="stars"></div>
+
+    <!-- Aurora Background -->
+    <div class="aurora"></div>
+
+    <!-- Grid Overlay -->
+    <div class="grid-overlay"></div>
+
+    <!-- Mouse Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Landing Section -->
+        <section class="landing-section" id="landingSection">
+            <!-- Logo -->
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i data-lucide="globe"></i>
+                </div>
+                <h1 class="logo-text">WORLD BEYOND REALITY</h1>
+                <span class="version-badge">v3.0</span>
+            </div>
+            <p class="made-by-tag" style="text-align:center; opacity:0.7; font-size:0.85rem; letter-spacing:1px; margin-top:-8px; margin-bottom:16px;">WHAT-IF by ram</p>
+
+            <!-- Main Heading -->
+            <div class="hero-content">
+                <h2 class="hero-heading">
+                    <span class="gradient-text">What if</span>
+                    <span class="normal-text">history took a different turn?</span>
+                </h2>
+                <p class="hero-subtitle">Explore infinite alternate timelines powered by advanced AI simulation. Discover what could have been.</p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="glass-card input-card">
+                    <div class="input-wrapper">
+                        <i data-lucide="sparkles" class="input-icon"></i>
+                        <input
+                            type="text"
+                            class="glass-input"
+                            id="questionInput"
+                            placeholder="Ask about an alternate historical event..."
+                            autocomplete="off"
+                        >
+                        <button class="simulate-btn" id="simulateBtn">
+                            <span class="btn-text">Simulate</span>
+                            <span class="btn-icon"><i data-lucide="arrow-right"></i></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Suggested Prompts -->
+                <div class="suggested-prompts">
+                    <span class="prompts-label">Try asking:</span>
+                    <div class="prompts-grid">
+                        <button class="prompt-chip" data-prompt="What if the Roman Empire never fell?">
+                            <i data-lucide="landmark"></i>
+                            <span>Roman Empire never fell</span>
+                        </button>
+                        <button class="prompt-chip" data-prompt="What if electricity was discovered in ancient Egypt?">
+                            <i data-lucide="zap"></i>
+                            <span>Electricity in Egypt</span>
+                        </button>
+                        <button class="prompt-chip" data-prompt="What if the printing press was invented 500 years earlier?">
+                            <i data-lucide="book-open"></i>
+                            <span>Early printing press</span>
+                        </button>
+                        <button class="prompt-chip" data-prompt="What if India colonized Britain instead?">
+                            <i data-lucide="flag"></i>
+                            <span>Reverse colonization</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section class="loading-section hidden" id="loadingSection">
+            <div class="loader-container">
+                <div class="timeline-loader">
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring"></div>
+                    <div class="loader-core">
+                        <i data-lucide="infinity"></i>
+                    </div>
+                </div>
+                <h3 class="loader-title">Simulating Alternate Reality...</h3>
+                <p class="loader-subtitle">Analyzing historical patterns and butterfly effects</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="loader-steps">
+                    <span class="loader-step active" id="step1">Parsing timeline</span>
+                    <span class="loader-step" id="step2">Calculating divergence</span>
+                    <span class="loader-step" id="step3">Generating reality</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+       <section class="results-section hidden" id="resultsSection">
+            <!-- Back Button -->
+            <button class="back-btn" id="backBtn">
+                <i data-lucide="arrow-left"></i>
+                <span>New Simulation</span>
+            </button>
+
+            <!-- Question Display -->
+            <div class="question-display glass-card">
+                <i data-lucide="help-circle"></i>
+                <h3 id="displayQuestion"></h3>
+            </div>
+
+            <!-- Full Answer Section -->
+            <div class="answer-section">
+                <h2 class="section-title">
+                    <i data-lucide="scroll-text"></i>
+                    Your Alternate Timeline
+                </h2>
+                <div class="answer-card glass-card">
+                    <div class="answer-content" id="answerContent">
+                        <!-- Full answer injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Simulation Button -->
+            <div class="new-simulation-cta">
+                <button class="simulate-btn large" id="newSimBtn">
+                    <span class="btn-text">Run Another Simulation</span>
+                    <span class="btn-icon"><i data-lucide="refresh-cw"></i></span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="footer-brand">WORLD BEYOND REALITY</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-tagline">Exploring infinite possibilities</span>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
